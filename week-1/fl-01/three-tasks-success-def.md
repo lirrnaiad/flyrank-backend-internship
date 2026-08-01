@@ -4,7 +4,7 @@
 Success definition: 
 - Pipeline correctly separates Japanese text using SudachiPy + dictionary lookup with >= 95% tokenization accuracy on a 100 to 300 character sample (usual length for problem statements).
 - Outputs a sorted list of terms by frequency that will then be manually reviewed to remove flavor text (narrative terms that are specific to that problem only, not competitive programming concepts itself).
-- The terms are compiled into an Anki deck of the top 100 most frequent vocab before I finish my 4th year, 1st semester, which is December19, 2026
+- The terms are compiled into an Anki deck of the top 100 most frequent vocab before I finish my 4th year, 1st semester, which is December 19, 2026
 
 ## 2. Capstone Manuscript, Chapters 1-5
 Success definition:
