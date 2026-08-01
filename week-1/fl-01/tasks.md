@@ -1,6 +1,6 @@
 # Recurring Tasks Breakdown
 
-| Done | Reliance on AI | Rationale |
+| Task | Reliance on AI | Rationale |
 |---|---|---|
 | Creating mining flashcards in Anki from Japanese light novel reading | Just me | Vocabulary I do not recognize the reading/definition are things that only I know, not AI. | 
 | pwn.college challenges | Collaborate with AI | Although I usually do the challenges myself due to the bite-sized nature of pwn.college's challenges, I often discuss with the built-in AI to learn how one challenge could be solved more efficiently. I usually end up learning more that way than if I just know my own solution. |
