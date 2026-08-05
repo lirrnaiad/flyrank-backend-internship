@@ -4,4 +4,4 @@ I am proving to a Technical Talent Acquisition Lead for Tokyo-Manila offshore ac
 
 ## Why This Needs to Exist
 
-As the brief says, only choose ONE claim, ONE person, and ONE action. Having a clear goal on what your portfolio will do will make it easier to actually map out your site, and to avoid  
+As the brief says, only choose ONE claim, ONE person, and ONE action. Having a clear goal on what your portfolio will do will make it easier to actually map out your site, and to avoid scope creep. All in all, this proof statement will serve as a manifesto and will be the foundation of this project from planning until deployment.
