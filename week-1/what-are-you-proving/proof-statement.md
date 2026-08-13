@@ -1,6 +1,6 @@
 # Proof Statement
 
-I am proving to a Technical Talent Acquisition Lead for Tokyo-Manila offshore accounts that I can turn Japanese client requirements into precise, ticketed developer tasks for local engineering teams, so that they schedule an initial interview.
+I'm a 4th-year BSIT student and the backend lead on UEP-Smart Agriculture, a merged two-team capstone project where I'm currently designing the system's architecture, which includes migrating our device communication from REST to MQTT, a decision grounded in prior research showing significant gains in speed and reduced network overhead for constrained IoT devices. I want to prove to the IBM recruiter who reached out to me about my Japanese studies that I'm building real backend engineering judgment alongside my JLPT N2 progress, so that once I share my results for the JLPT in the coming weeks, they'll follow up by email to discuss what a fit could look like as I move into my final year.
 
 ## Why This Needs to Exist
 
