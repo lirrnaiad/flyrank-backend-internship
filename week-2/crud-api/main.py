@@ -33,17 +33,17 @@ def root():
     return {"name": "Task API", "version": "1.0", "endpoints": ["/tasks"]}
 
 
-@app.get("/health")
-def health():
+@app.get("/health", description="Check if system is running.")
+def check_health():
     return {"status": "ok"}
 
 
-@app.get("/tasks")
+@app.get("/tasks", description="Returns every task in the system.")
 def get_tasks():
     return tasks
 
 
-@app.get("/tasks/{task_id}")
+@app.get("/tasks/{task_id}", description="Retrieve a single task by its ID.")
 def get_task(task_id: int):
     task_index = task_id - 1
 
@@ -55,7 +55,7 @@ def get_task(task_id: int):
         return task
 
 
-@app.post("/tasks", status_code=201)
+@app.post("/tasks", status_code=201, description="Add a new task.")
 def add_task(task: TaskCreate):
     global current_free_id
 
@@ -68,7 +68,7 @@ def add_task(task: TaskCreate):
     return new_task     
 
 
-@app.put("/tasks/{task_id}")
+@app.put("/tasks/{task_id}", description="Update a task.")
 def update_task(task_id: int, task: TaskUpdate):
     task_index = task_id - 1
 
@@ -87,7 +87,7 @@ def update_task(task_id: int, task: TaskUpdate):
     return tasks[task_index]
 
 
-@app.delete("/tasks/{task_id}", status_code=204)
+@app.delete("/tasks/{task_id}", status_code=204, description="Delete a task.")
 def delete_task(task_id: int):
     task_index = task_id - 1
     
