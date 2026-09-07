@@ -1,8 +1,8 @@
 # Task CRUD API
 
-A small in-memory Task management API built with FastAPI. Supports full CRUD
-(Create, Read, Update, Delete) over a `tasks` list, with request validation
-and interactive Swagger UI documentation.
+A small Task management API built with FastAPI, persisted to a local SQLite
+database. Supports full CRUD (Create, Read, Update, Delete) over a `tasks`
+table, with request validation and interactive Swagger UI documentation.
 
 ## Install & Run
 
@@ -10,8 +10,47 @@ and interactive Swagger UI documentation.
 pip install -r requirements.txt && uvicorn main:app --reload
 ```
 
+That's the one command you need. On startup the app creates `tasks.db`
+automatically (if it doesn't already exist), creates the `tasks` table, and
+seeds it with three example tasks. No manual database setup required.
+
 The API will be available at `http://127.0.0.1:8000`, and interactive docs
 (Swagger UI) at `http://127.0.0.1:8000/docs`.
+
+## Database
+
+**Why SQLite?** It's a single file with zero setup — no server process to
+install, configure, or run alongside the app. It ships with Python
+(`sqlite3` is in the standard library), and data survives restarts since
+everything is written to disk instead of an in-memory list.
+
+**Where it lives:** the database file is `tasks.db`, created automatically
+in the project directory the first time the app starts (see `init_db()` in
+`main.py`). It's git-ignored (see the repo's `.gitignore`), so a fresh clone
+starts with no database file — running the app is what creates it and seeds
+the three example tasks.
+
+### Schema
+
+```sql
+CREATE TABLE tasks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    done BOOLEAN DEFAULT 0
+)
+```
+
+![Database structure in DB Browser for SQLite](db-structure.png)
+
+![Task data in DB Browser for SQLite](db_data.png)
+
+### Example SQL query
+
+While exploring the seeded data in DB Browser's "Execute SQL" tab:
+
+```sql
+SELECT * FROM tasks WHERE done = 1;
+```
 
 ## Endpoints
 
@@ -35,10 +74,5 @@ server: uvicorn
 content-length: 136
 content-type: application/json
 
-[{"id":1,"title":"Complete report","done":false},{"id":2,"title":"Send email","done":false},{"id":3,"title":"Review code","done":false}]
+[{"id":1,"title":"Walk the dog","done":true},{"id":2,"title":"Wash clothes","done":false},{"id":3,"title":"Do today's reports","done":false}]
 ```
-
-## Swagger UI
-
-![Swagger UI screenshot](swagger.png)
-
