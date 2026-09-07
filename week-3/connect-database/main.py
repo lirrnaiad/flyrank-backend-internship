@@ -83,3 +83,13 @@ def get_tasks():
     rows = conn.execute("SELECT * FROM tasks ORDER BY id").fetchall()
     conn.close()
     return [dict(r) | {"done": bool(r["done"])} for r in rows]
+
+
+@app.get("/tasks/{task_id}", description="Retrieve a single task by its ID.")
+def get_task(task_id: int):
+    conn = get_conn()
+    row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
+    conn.close()
+    if row is None:
+        raise HTTPException(404, "Task not found")
+    return dict(row) | {"done": bool(row["done"])}
