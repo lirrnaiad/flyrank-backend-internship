@@ -93,3 +93,20 @@ def get_task(task_id: int):
     if row is None:
         raise HTTPException(404, "Task not found")
     return dict(row) | {"done": bool(row["done"])}
+
+
+@app.post("/tasks", status_code=201, description="Add a new task.")
+def add_task(task: TaskCreate):
+    if task is None or (task.title == "" or task.title is None):
+        raise HTTPException(status_code=400, detail="Title is empty")
+
+    conn = get_conn()
+    cur = conn.execute(
+        "INSERT INTO tasks (title, done) VALUES (?, ?)",
+        (task.title, 0)
+    )
+    
+    conn.commit()
+    row = conn.execute("SELECT * FROM tasks WHERE id = ?", (cur.lastrowid,)).fetchone()
+    conn.close()
+    return dict(row) | {"done": bool(row["done"])}
