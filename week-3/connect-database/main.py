@@ -110,3 +110,42 @@ def add_task(task: TaskCreate):
     row = conn.execute("SELECT * FROM tasks WHERE id = ?", (cur.lastrowid,)).fetchone()
     conn.close()
     return dict(row) | {"done": bool(row["done"])}
+
+
+@app.put("/tasks/{task_id}", description="Update a task.")
+def update_task(task_id: int, task: TaskUpdate):
+    if (task.title is None or task.title is "") and task.done is None:
+        raise HTTPException(status_code=400, detail="Empty body")
+
+    conn = get_conn()
+
+    if task.title is not None:
+        conn.execute(
+            "UPDATE tasks SET title=? WHERE id=?",
+            (task.title, task_id)
+        )
+
+    if task.done is not None:
+        conn.execute(
+            "UPDATE tasks SET done=? WHERE id=?",
+            (int(task.done), task_id)
+        )
+
+    conn.commit()
+    row = conn.execute("SELECT * FROM tasks WHERE id = ?", (task_id,)).fetchone()
+    conn.close()
+
+    if row is None:
+        raise HTTPException(404, "Task not found")
+
+    return dict(row) | {"done": bool(row["done"])}
+
+
+@app.delete("/tasks/{task_id}", status_code=204)
+def delete_task(task_id: int):
+    conn = get_conn()
+    cur = conn.execute("DELETE FROM tasks WHERE id=?", (task_id,))
+    conn.commit()
+    conn.close()
+    if cur.rowcount == 0:
+        raise HTTPException(404, "Task not found")
